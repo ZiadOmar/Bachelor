@@ -1,0 +1,2 @@
+E:\Dropbox\GUC\Bachelor\Bachelor\Test4(Stage1)\Bachelor\Bachelor.csproj;x86
+E:\Dropbox\GUC\Bachelor\Bachelor\Test4(Stage1)\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj;x86
