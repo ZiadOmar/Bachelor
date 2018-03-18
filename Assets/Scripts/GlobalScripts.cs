@@ -30,17 +30,12 @@ public class GlobalScripts : MonoBehaviour {
     //public bool ChooseLungs;
 
 
-    // private Vector3 endPosition = new Vector3(-1, 1.2f, 16);
-    //public Transform startMarker;
-    //public Transform endMarker;
-    //public float speed = 1.0F;
+  
+    public Transform startMarker;
+    public Transform endMarker;
     private float startTime;
     private float journeyLength;
-
-    //public Transform target;
-    private Vector3 endPosition = new Vector3(-1, 1.2f, 16);
     public float speed;
-
 
 
     // Use this for initialization
@@ -53,7 +48,7 @@ public class GlobalScripts : MonoBehaviour {
 
 
         startTime = Time.time;
-        journeyLength = Vector3.Distance(Lungs.transform.position, endPosition);
+        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 
         //if (ChooseHeart)  Buttons
         //{
@@ -130,13 +125,13 @@ public class GlobalScripts : MonoBehaviour {
         Heart.SetActive(true);
 
 
-        //float distCovered = (Time.time - startTime) * speed;
-        //float fracJourney = distCovered / journeyLength;
-        //Heart.transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
+        //float step = speed * Time.deltaTime;
+        //Heart.transform.position = Vector3.MoveTowards(Heart.transform.position, endPosition, step);
 
 
-        float step = speed * Time.deltaTime;
-        Heart.transform.position = Vector3.MoveTowards(Heart.transform.position, endPosition, step);
+        float distCovered = (Time.time - startTime) * speed;
+        float fracJourney = distCovered / journeyLength;
+        Heart.transform.position = Vector3.Lerp(Heart.transform.position, endMarker.position, fracJourney);
 
 
         Lungs.SetActive(false);
@@ -167,14 +162,14 @@ public class GlobalScripts : MonoBehaviour {
 
 
         //float step = speed * Time.deltaTime;
-        //Lungs.transform.position = Vector3.MoveTowards(Lungs.transform.position, endPosition, step);
+        //Lungs.transform.position = Vector3.MoveTowards(Lungs.transform.position, endMarker.position, step);
 
 
         float distCovered = (Time.time - startTime) * speed;
         float fracJourney = distCovered / journeyLength;
-        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, endPosition , fracJourney);
+        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, endMarker.position, fracJourney);
 
-        DrQuestion.SetActive(true);
+        DrQuestion.SetActive(true);  
         Option1.SetActive(true);
         Option2.SetActive(true);
         Option3.SetActive(true);
