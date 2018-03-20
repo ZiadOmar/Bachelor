@@ -11,6 +11,7 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
     public GameObject Brain;
     public GameObject PlaySound;
 
+
     // Use this for initialization
     void Start () {
 		
@@ -25,10 +26,25 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
-        (Heart.GetComponent<Heart>()).StopHeart();
-        (Lungs.GetComponent<Lung>()).StopLungs();
-        (PlaySound.GetComponent<PlaySound>()).StopSound();
-        (Brain.GetComponent<Brain>()).StopBrain();
+
+   
+
+        if (((Lungs.GetComponent<Lung>()).Zoom  || (Heart.GetComponent<Heart>()).Zoom  || (Brain.GetComponent<Brain>()).Zoom ))
+        {   (Heart.GetComponent<Heart>()).CancelZoomHeart();
+            (Lungs.GetComponent<Lung>()).CancelZoomLungs();
+            (Brain.GetComponent<Brain>()).CancelZoomBrain();
+   
+        }
+        else
+        {
+        
+                (Heart.GetComponent<Heart>()).StopHeart();
+                (Lungs.GetComponent<Lung>()).StopLungs();
+                (PlaySound.GetComponent<PlaySound>()).StopSound();
+                (Brain.GetComponent<Brain>()).StopBrain();
+                
+        }
+        
 
     }
 

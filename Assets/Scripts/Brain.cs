@@ -8,6 +8,8 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
 {
 
     public bool ChooseBrain;
+    public bool Zoom;
+    public int BrainTapped;
 
     // Use this for initialization
     void Start()
@@ -22,7 +24,17 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
-        ToggleBrain();
+
+        BrainTapped++;
+
+        if (BrainTapped == 1)
+            ToggleBrain();
+        else
+        {
+            if (BrainTapped == 2)
+                ZoomBrain();
+        }
+       
       
     }
 
@@ -34,7 +46,18 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
     public void OnInputUp(InputEventData eventData)
     {
     }
-  
+
+
+    public void ZoomBrain()
+    {
+        Zoom = true;
+    }
+
+    public void CancelZoomBrain()
+    {
+        Zoom = false;
+        BrainTapped = 0;
+    }
     public void ToggleBrain()
     {  
         ChooseBrain = true;
@@ -43,6 +66,8 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
     public void StopBrain()
     { 
         ChooseBrain = false;
+        Zoom = false;
+        BrainTapped = 0;
     }
 
 

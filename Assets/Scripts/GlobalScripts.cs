@@ -9,8 +9,6 @@ public class GlobalScripts : MonoBehaviour {
     public GameObject Brain;
     public GameObject skeleton;
     public GameObject Human;
-    //public AudioSource HeartSource;
-    //public AudioSource LungsSource;
     public GameObject DrQuestion;
     public GameObject RespiratoryRate;
     public GameObject HeartRate;
@@ -26,16 +24,18 @@ public class GlobalScripts : MonoBehaviour {
 
     public GameObject Sound;
     public GameObject Return;
-    //public bool ChooseHeart;
-    //public bool ChooseLungs;
-
+    
 
   
     public Transform startMarker;
     public Transform endMarker;
+    private Vector3 lungsInitial;
+    private Vector3 BrainInitial;
+    private Vector3 HeartInitial;
     private float startTime;
     private float journeyLength;
     public float speed;
+   
 
 
     // Use this for initialization
@@ -49,6 +49,12 @@ public class GlobalScripts : MonoBehaviour {
 
         startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+
+        lungsInitial = Lungs.transform.position;
+        HeartInitial = Heart.transform.position;
+        BrainInitial = Brain.transform.position;
+
+       
 
         //if (ChooseHeart)  Buttons
         //{
@@ -76,18 +82,34 @@ public class GlobalScripts : MonoBehaviour {
         if ((Heart.GetComponent<Heart>()).ChooseHeart)
         {
             HeartEnabled();
+
+            if ((Heart.GetComponent<Heart>()).Zoom)
+            {
+                // Heart.SetActive(false);
+                Heart.transform.Rotate(Vector3.right);
+            }
         }
         else
         {
             if ((Lungs.GetComponent<Lung>()).ChooseLungs)
             {
                 LungsEnabled();
+
+                if ((Lungs.GetComponent<Lung>()).Zoom)
+                {
+                    Lungs.SetActive(false);
+                }
             }
             else
             {
                 if ((Brain.GetComponent<Brain>()).ChooseBrain)
                 {
                     BrainEnabled();
+
+                    if ((Brain.GetComponent<Brain>()).Zoom)
+                    {
+                        Brain.SetActive(false);
+                    }
                 }
                 else
                 {
@@ -95,6 +117,13 @@ public class GlobalScripts : MonoBehaviour {
                     Option2.GetComponent<TextMesh>().text = "Option 2";
                     Option3.GetComponent<TextMesh>().text = "Option 3";
                     Option4.GetComponent<TextMesh>().text = "Option 4";
+
+                    Lungs.transform.position = lungsInitial;
+                    Heart.transform.position = HeartInitial;
+                    Brain.transform.position = BrainInitial;
+
+                    
+                    
 
                     Heart.SetActive(true);
                     Lungs.SetActive(true);
@@ -122,7 +151,7 @@ public class GlobalScripts : MonoBehaviour {
         Option2.GetComponent<TextMesh>().text = "Heart 2";
         Option3.GetComponent<TextMesh>().text = "Heart 3";
         Option4.GetComponent<TextMesh>().text = "Heart 4";
-        Heart.SetActive(true);
+       
 
 
         //float step = speed * Time.deltaTime;
@@ -133,10 +162,10 @@ public class GlobalScripts : MonoBehaviour {
         float fracJourney = distCovered / journeyLength;
         Heart.transform.position = Vector3.Lerp(Heart.transform.position, endMarker.position, fracJourney);
 
-
-        Lungs.SetActive(false);
-        skeleton.SetActive(false);
-        Brain.SetActive(false);
+        Heart.SetActive(true);
+        Lungs.SetActive(true);
+        skeleton.SetActive(true);
+        Brain.SetActive(true);
         DrQuestion.SetActive(true);
         Option1.SetActive(true);
         Option2.SetActive(true);
@@ -155,20 +184,20 @@ public class GlobalScripts : MonoBehaviour {
         Option2.GetComponent<TextMesh>().text = "Lung 2";
         Option3.GetComponent<TextMesh>().text = "Lung 3";
         Option4.GetComponent<TextMesh>().text = "Lung 4";
-        Lungs.SetActive(true);
-        Heart.SetActive(false);
-        skeleton.SetActive(false);
-        Brain.SetActive(false);
-
 
         //float step = speed * Time.deltaTime;
         //Lungs.transform.position = Vector3.MoveTowards(Lungs.transform.position, endMarker.position, step);
-
 
         float distCovered = (Time.time - startTime) * speed;
         float fracJourney = distCovered / journeyLength;
         Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, endMarker.position, fracJourney);
 
+
+
+        Lungs.SetActive(true);
+        Heart.SetActive(true);
+        skeleton.SetActive(true);
+        Brain.SetActive(true);
         DrQuestion.SetActive(true);  
         Option1.SetActive(true);
         Option2.SetActive(true);
@@ -188,9 +217,14 @@ public class GlobalScripts : MonoBehaviour {
         Option2.GetComponent<TextMesh>().text = "Brain 2";
         Option3.GetComponent<TextMesh>().text = "Brain 3";
         Option4.GetComponent<TextMesh>().text = "Brain 4";
-        Lungs.SetActive(false);
-        Heart.SetActive(false);
-        skeleton.SetActive(false);
+
+        float distCovered = (Time.time - startTime) * speed;
+        float fracJourney = distCovered / journeyLength;
+        Brain.transform.position = Vector3.Lerp(Brain.transform.position, endMarker.position, fracJourney);
+
+        Lungs.SetActive(true);
+        Heart.SetActive(true);
+        skeleton.SetActive(true);
         Brain.SetActive(true);
         DrQuestion.SetActive(true);
         Option1.SetActive(true);

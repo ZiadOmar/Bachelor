@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
@@ -9,6 +8,8 @@ public class Heart : MonoBehaviour, IInputClickHandler, IInputHandler
     
     public AudioSource MyAudioSource;
     public bool ChooseHeart;
+    public bool Zoom;
+    public int HeartTapped;
 
     // Use this for initialization
     void Start () {
@@ -32,10 +33,28 @@ public class Heart : MonoBehaviour, IInputClickHandler, IInputHandler
     }
 
     public void OnInputClicked(InputClickedEventData eventData)
+    {    // AirTap code goes here
+        HeartTapped++;
+
+        if(HeartTapped == 1)
+               ToggleHeart();
+        else
+        {
+            if (HeartTapped == 2)
+                ZoomHeart();
+        }
+      
+    }
+
+    public void ZoomHeart()
     {
-        // AirTap code goes here
-        ToggleHeart();
-        //print("SHiiii222");
+        Zoom = true;
+    }
+
+    public void CancelZoomHeart()
+    {
+        Zoom = false;
+        HeartTapped = 0;
     }
 
     public void OnInputDown(InputEventData eventData)
@@ -46,26 +65,32 @@ public class Heart : MonoBehaviour, IInputClickHandler, IInputHandler
     public void OnInputUp(InputEventData eventData)
     {
     }
+
+
     //void OnMouseDown()
     //{
     //    ToggleHeart();
     //}
-    public void ToggleHeart()
-    {
-       //MyAudioSource.Play();
-        ChooseHeart = true;
-    }
 
     //void OnMouseUp()
     //{
     //    StopHeart();
     //}
 
+
+    public void ToggleHeart()
+    {
+       //MyAudioSource.Play();
+        ChooseHeart = true;
+    }
+
+    
     public void StopHeart()
     {
         //MyAudioSource.Stop();
         ChooseHeart = false;
-       
+        Zoom = false;
+        HeartTapped = 0;
     }
 
    
