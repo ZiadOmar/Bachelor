@@ -24,14 +24,18 @@ public class GlobalScripts : MonoBehaviour {
 
     public GameObject Sound;
     public GameObject Return;
-    
 
-  
+    public Material lungsMaterial;
     public Transform startMarker;
     public Transform endMarker;
     private Vector3 lungsInitial;
     private Vector3 BrainInitial;
     private Vector3 HeartInitial;
+    private Quaternion lungsInitialRotate;
+    private Quaternion BrainInitialRotate;
+    private Quaternion HeartInitialRotate;
+
+
     private float startTime;
     private float journeyLength;
     public float speed;
@@ -54,7 +58,11 @@ public class GlobalScripts : MonoBehaviour {
         HeartInitial = Heart.transform.position;
         BrainInitial = Brain.transform.position;
 
-       
+        lungsInitialRotate = Lungs.transform.rotation;
+        HeartInitialRotate = Heart.transform.rotation;
+        BrainInitialRotate = Brain.transform.rotation;
+
+        lungsMaterial.color = new Color32(139, 49, 49, 128);
 
         //if (ChooseHeart)  Buttons
         //{
@@ -78,37 +86,39 @@ public class GlobalScripts : MonoBehaviour {
     void Update () {
        
 
-
         if ((Heart.GetComponent<Heart>()).ChooseHeart)
-        {
+        {   //animate
             HeartEnabled();
 
             if ((Heart.GetComponent<Heart>()).Zoom)
             {
-                // Heart.SetActive(false);
-                Heart.transform.Rotate(Vector3.right);
+                //HeartCross-section.SetActive(true);
+                Heart.transform.Rotate(Vector3.up);    
             }
         }
         else
         {
             if ((Lungs.GetComponent<Lung>()).ChooseLungs)
-            {
+            {   //animate
                 LungsEnabled();
+              
 
                 if ((Lungs.GetComponent<Lung>()).Zoom)
                 {
-                    Lungs.SetActive(false);
+                    //LungsCross-section.SetActive(true);
+                    Lungs.transform.Rotate(Vector3.up);
                 }
             }
             else
             {
                 if ((Brain.GetComponent<Brain>()).ChooseBrain)
-                {
+                {   //animate
                     BrainEnabled();
 
                     if ((Brain.GetComponent<Brain>()).Zoom)
                     {
-                        Brain.SetActive(false);
+                        //BrainCross-section.SetActive(true);
+                        Brain.transform.Rotate(Vector3.up);
                     }
                 }
                 else
@@ -122,8 +132,12 @@ public class GlobalScripts : MonoBehaviour {
                     Heart.transform.position = HeartInitial;
                     Brain.transform.position = BrainInitial;
 
-                    
-                    
+                    Lungs.transform.rotation = lungsInitialRotate;
+                    Heart.transform.rotation = HeartInitialRotate;
+                    Brain.transform.rotation = BrainInitialRotate;
+
+                    lungsMaterial.color = new Color32(139, 49, 49, 128);
+
 
                     Heart.SetActive(true);
                     Lungs.SetActive(true);
@@ -176,6 +190,17 @@ public class GlobalScripts : MonoBehaviour {
         BrainFunction.SetActive(false);
         Sound.SetActive(true);
         Return.SetActive(true);
+
+       // Lungs.transform.position = lungsInitial;
+       // Brain.transform.position = BrainInitial;
+        
+        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, lungsInitial, fracJourney);
+        Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainInitial, fracJourney);
+
+        Lungs.transform.rotation = lungsInitialRotate;
+        Brain.transform.rotation = BrainInitialRotate;
+
+        lungsMaterial.color = new Color32(139, 49, 49, 128);
     }
 
     void LungsEnabled()
@@ -193,6 +218,8 @@ public class GlobalScripts : MonoBehaviour {
         Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, endMarker.position, fracJourney);
 
 
+        lungsMaterial.color = new Color32(139, 49, 49, 255);
+
 
         Lungs.SetActive(true);
         Heart.SetActive(true);
@@ -208,6 +235,16 @@ public class GlobalScripts : MonoBehaviour {
         BrainFunction.SetActive(false);
         Sound.SetActive(true);
         Return.SetActive(true);
+
+
+        //Heart.transform.position = HeartInitial;
+        //Brain.transform.position = BrainInitial;
+        Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartInitial, fracJourney);
+        Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainInitial, fracJourney);
+
+        Heart.transform.rotation = HeartInitialRotate;
+        Brain.transform.rotation = BrainInitialRotate;
+
 
     }
 
@@ -236,6 +273,19 @@ public class GlobalScripts : MonoBehaviour {
         BrainFunction.SetActive(true);
         Sound.SetActive(false);
         Return.SetActive(true);
+
+        //Lungs.transform.position = lungsInitial;
+        //Heart.transform.position = HeartInitial;
+
+        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, lungsInitial, fracJourney);
+        Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartInitial, fracJourney);
+        
+
+        Lungs.transform.rotation = lungsInitialRotate;
+        Heart.transform.rotation = HeartInitialRotate;
+        
+
+        lungsMaterial.color = new Color32(139, 49, 49, 128);
 
     }
 }

@@ -11,6 +11,9 @@ public class Lung : MonoBehaviour, IInputClickHandler, IInputHandler
     public bool Zoom;
     public int LungsTapped;
 
+    public GameObject Heart;
+    public GameObject Brain;
+
 
     // Use this for initialization
     void Start()
@@ -36,19 +39,24 @@ public class Lung : MonoBehaviour, IInputClickHandler, IInputHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         // AirTap code goes here
-
         LungsTapped++;
 
+        (Heart.GetComponent<Heart>()).StopHeart();
+        (Brain.GetComponent<Brain>()).StopBrain();
+
         if (LungsTapped == 1)
-            ToggleLungs();
+          ToggleLungs();
+
         else
         {
-            if (LungsTapped == 2)
+            if (Zoom)
+                CancelZoomLungs();
+            else
                 ZoomLungs();
         }
-       
-      
+
     }
+
 
     public void OnInputDown(InputEventData eventData)
     {
@@ -73,12 +81,13 @@ public class Lung : MonoBehaviour, IInputClickHandler, IInputHandler
     public void ZoomLungs()
     {
         Zoom = true;
+        LungsTapped = 1;
     }
 
     public void CancelZoomLungs()
     {
         Zoom = false;
-        LungsTapped = 0;
+        LungsTapped = 1;
     }
 
 

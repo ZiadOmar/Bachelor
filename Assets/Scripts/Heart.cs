@@ -11,6 +11,10 @@ public class Heart : MonoBehaviour, IInputClickHandler, IInputHandler
     public bool Zoom;
     public int HeartTapped;
 
+  
+    public GameObject Lungs;
+    public GameObject Brain;
+
     // Use this for initialization
     void Start () {
         MyAudioSource = GetComponent<AudioSource>();
@@ -36,25 +40,34 @@ public class Heart : MonoBehaviour, IInputClickHandler, IInputHandler
     {    // AirTap code goes here
         HeartTapped++;
 
-        if(HeartTapped == 1)
-               ToggleHeart();
+        (Lungs.GetComponent<Lung>()).StopLungs();
+        (Brain.GetComponent<Brain>()).StopBrain();
+
+        if (HeartTapped == 1)
+          ToggleHeart();
+
+
         else
         {
-            if (HeartTapped == 2)
+            if (Zoom)
+                CancelZoomHeart();
+            else
                 ZoomHeart();
         }
-      
+
+
     }
 
     public void ZoomHeart()
     {
         Zoom = true;
+        HeartTapped = 1;
     }
 
     public void CancelZoomHeart()
     {
         Zoom = false;
-        HeartTapped = 0;
+        HeartTapped = 1;
     }
 
     public void OnInputDown(InputEventData eventData)

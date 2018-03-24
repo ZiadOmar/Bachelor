@@ -27,24 +27,28 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
     {
         // AirTap code goes here
 
-   
 
-        if (((Lungs.GetComponent<Lung>()).Zoom  || (Heart.GetComponent<Heart>()).Zoom  || (Brain.GetComponent<Brain>()).Zoom ))
-        {   (Heart.GetComponent<Heart>()).CancelZoomHeart();
-            (Lungs.GetComponent<Lung>()).CancelZoomLungs();
-            (Brain.GetComponent<Brain>()).CancelZoomBrain();
-   
-        }
-        else
-        {
-        
-                (Heart.GetComponent<Heart>()).StopHeart();
-                (Lungs.GetComponent<Lung>()).StopLungs();
-                (PlaySound.GetComponent<PlaySound>()).StopSound();
-                (Brain.GetComponent<Brain>()).StopBrain();
-                
-        }
-        
+        (Heart.GetComponent<Heart>()).StopHeart();
+        (Lungs.GetComponent<Lung>()).StopLungs();
+        (PlaySound.GetComponent<PlaySound>()).StopSound();
+        (Brain.GetComponent<Brain>()).StopBrain();
+
+        //if (((Lungs.GetComponent<Lung>()).Zoom  || (Heart.GetComponent<Heart>()).Zoom  || (Brain.GetComponent<Brain>()).Zoom ))
+        //{   (Heart.GetComponent<Heart>()).CancelZoomHeart();
+        //    (Lungs.GetComponent<Lung>()).CancelZoomLungs();
+        //    (Brain.GetComponent<Brain>()).CancelZoomBrain();
+
+        //}
+        //else
+        //{
+
+        //        (Heart.GetComponent<Heart>()).StopHeart();
+        //        (Lungs.GetComponent<Lung>()).StopLungs();
+        //        (PlaySound.GetComponent<PlaySound>()).StopSound();
+        //        (Brain.GetComponent<Brain>()).StopBrain();
+
+        //}
+
 
     }
 

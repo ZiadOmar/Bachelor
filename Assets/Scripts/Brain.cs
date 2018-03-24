@@ -11,6 +11,10 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
     public bool Zoom;
     public int BrainTapped;
 
+    public GameObject Heart;
+    public GameObject Lungs;
+
+
     // Use this for initialization
     void Start()
     {
@@ -27,15 +31,21 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
 
         BrainTapped++;
 
+        (Heart.GetComponent<Heart>()).StopHeart();
+        (Lungs.GetComponent<Lung>()).StopLungs();
+
+
         if (BrainTapped == 1)
             ToggleBrain();
+
         else
         {
-            if (BrainTapped == 2)
-                ZoomBrain();
+           if(Zoom)
+                CancelZoomBrain();
+           else
+                ZoomBrain();   
         }
-       
-      
+  
     }
 
     public void OnInputDown(InputEventData eventData)
@@ -51,12 +61,13 @@ public class Brain : MonoBehaviour, IInputClickHandler, IInputHandler
     public void ZoomBrain()
     {
         Zoom = true;
+        BrainTapped = 1;
     }
 
     public void CancelZoomBrain()
     {
         Zoom = false;
-        BrainTapped = 0;
+        BrainTapped = 1;
     }
     public void ToggleBrain()
     {  
