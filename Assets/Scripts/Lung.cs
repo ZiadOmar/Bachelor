@@ -13,6 +13,7 @@ public class Lung : MonoBehaviour, IInputClickHandler, IInputHandler
 
     public GameObject Heart;
     public GameObject Brain;
+    public GameObject PlaySound;
 
 
     // Use this for initialization
@@ -43,6 +44,9 @@ public class Lung : MonoBehaviour, IInputClickHandler, IInputHandler
 
         (Heart.GetComponent<Heart>()).StopHeart();
         (Brain.GetComponent<Brain>()).StopBrain();
+        (Heart.GetComponent<Heart>()).MyAudioSource.Stop();
+        (PlaySound.GetComponent<PlaySound>()).tapped = false;
+
 
         if (LungsTapped == 1)
           ToggleLungs();

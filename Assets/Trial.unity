@@ -706,6 +706,7 @@ MonoBehaviour:
   BrainTapped: 0
   Heart: {fileID: 849147455}
   Lungs: {fileID: 1171821256}
+  PlaySound: {fileID: 915305961}
 --- !u!33 &380353621
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1376,6 +1377,7 @@ MonoBehaviour:
   HeartTapped: 0
   Lungs: {fileID: 1171821256}
   Brain: {fileID: 380353618}
+  PlaySound: {fileID: 915305961}
 --- !u!4 &849147457
 Transform:
   m_ObjectHideFlags: 0
@@ -1530,6 +1532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Heart: {fileID: 849147455}
   Lungs: {fileID: 1171821256}
+  tapped: 0
 --- !u!23 &915305963
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2176,6 +2179,7 @@ MonoBehaviour:
   LungsTapped: 0
   Heart: {fileID: 849147455}
   Brain: {fileID: 380353618}
+  PlaySound: {fileID: 915305961}
 --- !u!33 &1171821261
 MeshFilter:
   m_ObjectHideFlags: 0

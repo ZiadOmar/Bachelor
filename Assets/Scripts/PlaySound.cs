@@ -10,6 +10,7 @@ public class PlaySound : MonoBehaviour, IInputClickHandler, IInputHandler
     AudioSource MyAudioSource;
     public GameObject Heart;
     public GameObject Lungs;
+    public bool tapped;
 
     // Use this for initialization
     void Start()
@@ -53,8 +54,12 @@ public class PlaySound : MonoBehaviour, IInputClickHandler, IInputHandler
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
+        tapped = !tapped;
         // AirTap code goes here
-        ToggleSound();
+        if (tapped)
+            ToggleSound();
+        else
+            StopSound();
     }
 
     public void OnInputDown(InputEventData eventData)
@@ -79,6 +84,7 @@ public class PlaySound : MonoBehaviour, IInputClickHandler, IInputHandler
      public void StopSound()
     {
         MyAudioSource.Stop();
+        
     }
 
 }
