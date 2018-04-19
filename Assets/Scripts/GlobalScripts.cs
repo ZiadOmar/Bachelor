@@ -27,10 +27,13 @@ public class GlobalScripts : MonoBehaviour {
 
     public Material lungsMaterial;
     public Transform startMarker;
+    public Transform HeartstartMarker;
+    public Transform LungsstartMarker;
+    public Transform BrainstartMarker;
     public Transform endMarker;
-    private Vector3 lungsInitial;
-    private Vector3 BrainInitial;
-    private Vector3 HeartInitial;
+    //public Vector3 lungsInitial;
+    //public Vector3 BrainInitial;
+    //public Vector3 HeartInitial;
     private Quaternion lungsInitialRotate;
     private Quaternion BrainInitialRotate;
     private Quaternion HeartInitialRotate;
@@ -54,9 +57,7 @@ public class GlobalScripts : MonoBehaviour {
         startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 
-        lungsInitial = Lungs.transform.position;
-        HeartInitial = Heart.transform.position;
-        BrainInitial = Brain.transform.position;
+       
 
         lungsInitialRotate = Lungs.transform.rotation;
         HeartInitialRotate = Heart.transform.rotation;
@@ -84,7 +85,10 @@ public class GlobalScripts : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
        
+
+        
 
         if ((Heart.GetComponent<Heart>()).ChooseHeart)
         {   //animate
@@ -128,9 +132,7 @@ public class GlobalScripts : MonoBehaviour {
                     Option3.GetComponent<TextMesh>().text = "Option 3";
                     Option4.GetComponent<TextMesh>().text = "Option 4";
 
-                    Lungs.transform.position = lungsInitial;
-                    Heart.transform.position = HeartInitial;
-                    Brain.transform.position = BrainInitial;
+
 
                     Lungs.transform.rotation = lungsInitialRotate;
                     Heart.transform.rotation = HeartInitialRotate;
@@ -191,11 +193,11 @@ public class GlobalScripts : MonoBehaviour {
         Sound.SetActive(true);
         Return.SetActive(true);
 
-       // Lungs.transform.position = lungsInitial;
-       // Brain.transform.position = BrainInitial;
+        //Lungs.transform.position = lungsInitial;
+        //Brain.transform.position = BrainInitial;
         
-        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, lungsInitial, fracJourney);
-        Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainInitial, fracJourney);
+        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, LungsstartMarker.position, fracJourney);
+        Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainstartMarker.position, fracJourney);
 
         Lungs.transform.rotation = lungsInitialRotate;
         Brain.transform.rotation = BrainInitialRotate;
@@ -237,10 +239,10 @@ public class GlobalScripts : MonoBehaviour {
         Return.SetActive(true);
 
 
-        //Heart.transform.position = HeartInitial;
-        //Brain.transform.position = BrainInitial;
-        Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartInitial, fracJourney);
-        Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainInitial, fracJourney);
+        //Heart.transform.position = HeartstartMarker.position;
+        //Brain.transform.position = BrainstartMarker.position;
+        Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartstartMarker.position, fracJourney);
+        Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainstartMarker.position, fracJourney);
 
         Heart.transform.rotation = HeartInitialRotate;
         Brain.transform.rotation = BrainInitialRotate;
@@ -277,8 +279,8 @@ public class GlobalScripts : MonoBehaviour {
         //Lungs.transform.position = lungsInitial;
         //Heart.transform.position = HeartInitial;
 
-        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, lungsInitial, fracJourney);
-        Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartInitial, fracJourney);
+        Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, LungsstartMarker.position, fracJourney);
+        Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartstartMarker.position, fracJourney);
         
 
         Lungs.transform.rotation = lungsInitialRotate;

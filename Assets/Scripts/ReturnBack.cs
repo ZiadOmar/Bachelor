@@ -10,6 +10,7 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
     public GameObject Lungs;
     public GameObject Brain;
     public GameObject PlaySound;
+    public GameObject GlobalScripts;
 
 
     // Use this for initialization
@@ -32,6 +33,10 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
         (Lungs.GetComponent<Lung>()).StopLungs();
         (PlaySound.GetComponent<PlaySound>()).StopSound();
         (Brain.GetComponent<Brain>()).StopBrain();
+
+        Lungs.transform.position = GlobalScripts.GetComponent<GlobalScripts>().LungsstartMarker.position;
+        Heart.transform.position = GlobalScripts.GetComponent<GlobalScripts>().HeartstartMarker.position;
+        Brain.transform.position = GlobalScripts.GetComponent<GlobalScripts>().BrainstartMarker.position;
 
         //if (((Lungs.GetComponent<Lung>()).Zoom  || (Heart.GetComponent<Heart>()).Zoom  || (Brain.GetComponent<Brain>()).Zoom ))
         //{   (Heart.GetComponent<Heart>()).CancelZoomHeart();
