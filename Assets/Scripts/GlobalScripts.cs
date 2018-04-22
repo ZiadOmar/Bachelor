@@ -31,9 +31,9 @@ public class GlobalScripts : MonoBehaviour {
     public Transform LungsstartMarker;
     public Transform BrainstartMarker;
     public Transform endMarker;
-    //public Vector3 lungsInitial;
-    //public Vector3 BrainInitial;
-    //public Vector3 HeartInitial;
+    private Vector3 lungsInitialScale;
+    private Vector3 BrainInitialScale;
+    private Vector3 HeartInitialScale;
     private Quaternion lungsInitialRotate;
     private Quaternion BrainInitialRotate;
     private Quaternion HeartInitialRotate;
@@ -57,7 +57,10 @@ public class GlobalScripts : MonoBehaviour {
         startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 
-       
+
+        lungsInitialScale = Lungs.transform.localScale;
+        HeartInitialScale = Heart.transform.localScale;
+        BrainInitialScale = Brain.transform.localScale;
 
         lungsInitialRotate = Lungs.transform.rotation;
         HeartInitialRotate = Heart.transform.rotation;
@@ -132,7 +135,9 @@ public class GlobalScripts : MonoBehaviour {
                     Option3.GetComponent<TextMesh>().text = "Option 3";
                     Option4.GetComponent<TextMesh>().text = "Option 4";
 
-
+                    Lungs.transform.localScale = lungsInitialScale;
+                    Heart.transform.localScale = HeartInitialScale;
+                    Brain.transform.localScale = BrainInitialScale;
 
                     Lungs.transform.rotation = lungsInitialRotate;
                     Heart.transform.rotation = HeartInitialRotate;
@@ -163,20 +168,22 @@ public class GlobalScripts : MonoBehaviour {
     void HeartEnabled()
     {
 
-        Option1.GetComponent<TextMesh>().text = "Heart 1";
-        Option2.GetComponent<TextMesh>().text = "Heart 2";
-        Option3.GetComponent<TextMesh>().text = "Heart 3";
-        Option4.GetComponent<TextMesh>().text = "Heart 4";
-       
+        Option1.GetComponent<TextMesh>().text = "Cardiovascular disease";
+        Option2.GetComponent<TextMesh>().text = "Angina pectoris";
+        Option3.GetComponent<TextMesh>().text = "Tachycardia";
+        Option4.GetComponent<TextMesh>().text = "Cardiomyopathy";
+
 
 
         //float step = speed * Time.deltaTime;
         //Heart.transform.position = Vector3.MoveTowards(Heart.transform.position, endPosition, step);
-
+       
 
         float distCovered = (Time.time - startTime) * speed;
         float fracJourney = distCovered / journeyLength;
         Heart.transform.position = Vector3.Lerp(Heart.transform.position, endMarker.position, fracJourney);
+
+        Heart.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 
         Heart.SetActive(true);
         Lungs.SetActive(true);
@@ -199,6 +206,9 @@ public class GlobalScripts : MonoBehaviour {
         Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, LungsstartMarker.position, fracJourney);
         Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainstartMarker.position, fracJourney);
 
+        Lungs.transform.localScale = lungsInitialScale;
+        Brain.transform.localScale = BrainInitialScale;
+
         Lungs.transform.rotation = lungsInitialRotate;
         Brain.transform.rotation = BrainInitialRotate;
 
@@ -207,10 +217,10 @@ public class GlobalScripts : MonoBehaviour {
 
     void LungsEnabled()
     {
-        Option1.GetComponent<TextMesh>().text = "Lung 1";
-        Option2.GetComponent<TextMesh>().text = "Lung 2";
-        Option3.GetComponent<TextMesh>().text = "Lung 3";
-        Option4.GetComponent<TextMesh>().text = "Lung 4";
+        Option1.GetComponent<TextMesh>().text = "Tuberculosis";
+        Option2.GetComponent<TextMesh>().text = "Pneumonia";
+        Option3.GetComponent<TextMesh>().text = "Pulmonary fibrosis";
+        Option4.GetComponent<TextMesh>().text = "Shortness of breath";
 
         //float step = speed * Time.deltaTime;
         //Lungs.transform.position = Vector3.MoveTowards(Lungs.transform.position, endMarker.position, step);
@@ -219,6 +229,7 @@ public class GlobalScripts : MonoBehaviour {
         float fracJourney = distCovered / journeyLength;
         Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, endMarker.position, fracJourney);
 
+        Lungs.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
         lungsMaterial.color = new Color32(139, 49, 49, 255);
 
@@ -244,6 +255,10 @@ public class GlobalScripts : MonoBehaviour {
         Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartstartMarker.position, fracJourney);
         Brain.transform.position = Vector3.Lerp(Brain.transform.position, BrainstartMarker.position, fracJourney);
 
+      
+        Heart.transform.localScale = HeartInitialScale;
+        Brain.transform.localScale = BrainInitialScale;
+
         Heart.transform.rotation = HeartInitialRotate;
         Brain.transform.rotation = BrainInitialRotate;
 
@@ -252,14 +267,18 @@ public class GlobalScripts : MonoBehaviour {
 
     void BrainEnabled()
     {
-        Option1.GetComponent<TextMesh>().text = "Brain 1";
-        Option2.GetComponent<TextMesh>().text = "Brain 2";
-        Option3.GetComponent<TextMesh>().text = "Brain 3";
-        Option4.GetComponent<TextMesh>().text = "Brain 4";
+        Option1.GetComponent<TextMesh>().text = "Encephalopathy";
+        Option2.GetComponent<TextMesh>().text = "Neurological disorder";
+        Option3.GetComponent<TextMesh>().text = "Multiple sclerosis";
+        Option4.GetComponent<TextMesh>().text = "Epileptic seizure";
 
         float distCovered = (Time.time - startTime) * speed;
         float fracJourney = distCovered / journeyLength;
         Brain.transform.position = Vector3.Lerp(Brain.transform.position, endMarker.position, fracJourney);
+
+
+        Brain.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
 
         Lungs.SetActive(true);
         Heart.SetActive(true);
@@ -281,7 +300,9 @@ public class GlobalScripts : MonoBehaviour {
 
         Lungs.transform.position = Vector3.Lerp(Lungs.transform.position, LungsstartMarker.position, fracJourney);
         Heart.transform.position = Vector3.Lerp(Heart.transform.position, HeartstartMarker.position, fracJourney);
-        
+
+        Lungs.transform.localScale = lungsInitialScale;
+        Heart.transform.localScale = HeartInitialScale;
 
         Lungs.transform.rotation = lungsInitialRotate;
         Heart.transform.rotation = HeartInitialRotate;
