@@ -38,6 +38,12 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
         Heart.transform.position = GlobalScripts.GetComponent<GlobalScripts>().HeartstartMarker.position;
         Brain.transform.position = GlobalScripts.GetComponent<GlobalScripts>().BrainstartMarker.position;
 
+        Vector3 gazeDirection = Camera.main.transform.forward;
+        Heart.transform.rotation = Quaternion.LookRotation(gazeDirection);
+        Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection);
+        Brain.transform.rotation = Quaternion.LookRotation(gazeDirection);
+ 
+
         //if (((Lungs.GetComponent<Lung>()).Zoom  || (Heart.GetComponent<Heart>()).Zoom  || (Brain.GetComponent<Brain>()).Zoom ))
         //{   (Heart.GetComponent<Heart>()).CancelZoomHeart();
         //    (Lungs.GetComponent<Lung>()).CancelZoomLungs();

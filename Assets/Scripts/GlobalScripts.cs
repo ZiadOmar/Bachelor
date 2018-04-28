@@ -34,9 +34,10 @@ public class GlobalScripts : MonoBehaviour {
     private Vector3 lungsInitialScale;
     private Vector3 BrainInitialScale;
     private Vector3 HeartInitialScale;
-    private Quaternion lungsInitialRotate;
-    private Quaternion BrainInitialRotate;
-    private Quaternion HeartInitialRotate;
+    public Quaternion lungsInitialRotate;
+    public Quaternion BrainInitialRotate;
+    public Quaternion HeartInitialRotate;
+    public Vector3 gazeDirection;
 
 
     private float startTime;
@@ -62,9 +63,9 @@ public class GlobalScripts : MonoBehaviour {
         HeartInitialScale = Heart.transform.localScale;
         BrainInitialScale = Brain.transform.localScale;
 
-        lungsInitialRotate = Lungs.transform.rotation;
-        HeartInitialRotate = Heart.transform.rotation;
-        BrainInitialRotate = Brain.transform.rotation;
+        //lungsInitialRotate = Lungs.transform.rotation;
+        //HeartInitialRotate = Heart.transform.rotation;
+        //BrainInitialRotate = Brain.transform.rotation;
 
         lungsMaterial.color = new Color32(139, 49, 49, 128);
 
@@ -89,9 +90,15 @@ public class GlobalScripts : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-       
 
-        
+        gazeDirection = Camera.main.transform.forward;
+        //Heart.transform.rotation = Quaternion.LookRotation(gazeDirection);
+        //Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection); 
+        //Brain.transform.rotation = Quaternion.LookRotation(gazeDirection);
+
+        //Heart.transform.LookAt(Heart.transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
+
+        //Lungs.transform.LookAt(Camera.main.transform);
 
         if ((Heart.GetComponent<Heart>()).ChooseHeart)
         {   //animate
@@ -139,10 +146,11 @@ public class GlobalScripts : MonoBehaviour {
                     Heart.transform.localScale = HeartInitialScale;
                     Brain.transform.localScale = BrainInitialScale;
 
-                    Lungs.transform.rotation = lungsInitialRotate;
-                    Heart.transform.rotation = HeartInitialRotate;
-                    Brain.transform.rotation = BrainInitialRotate;
+                    //Lungs.transform.rotation = lungsInitialRotate;
+                    //Heart.transform.rotation = HeartInitialRotate;
+                    //Brain.transform.rotation = BrainInitialRotate;
 
+                  
                     lungsMaterial.color = new Color32(139, 49, 49, 128);
 
 
@@ -167,6 +175,8 @@ public class GlobalScripts : MonoBehaviour {
 
     void HeartEnabled()
     {
+        HeartInitialRotate = Quaternion.LookRotation(gazeDirection);
+
 
         Option1.GetComponent<TextMesh>().text = "Cardiovascular disease";
         Option2.GetComponent<TextMesh>().text = "Angina pectoris";
@@ -209,17 +219,21 @@ public class GlobalScripts : MonoBehaviour {
         Lungs.transform.localScale = lungsInitialScale;
         Brain.transform.localScale = BrainInitialScale;
 
+
         Lungs.transform.rotation = lungsInitialRotate;
         Brain.transform.rotation = BrainInitialRotate;
+  
 
         lungsMaterial.color = new Color32(139, 49, 49, 128);
     }
 
     void LungsEnabled()
     {
+        lungsInitialRotate = Quaternion.LookRotation(gazeDirection); 
+
         Option1.GetComponent<TextMesh>().text = "Tuberculosis";
-        Option2.GetComponent<TextMesh>().text = "Pneumonia";
-        Option3.GetComponent<TextMesh>().text = "Pulmonary fibrosis";
+        Option2.GetComponent<TextMesh>().text = "Pulmonary fibrosis";
+        Option3.GetComponent<TextMesh>().text = "Pneumonia";
         Option4.GetComponent<TextMesh>().text = "Shortness of breath";
 
         //float step = speed * Time.deltaTime;
@@ -262,11 +276,13 @@ public class GlobalScripts : MonoBehaviour {
         Heart.transform.rotation = HeartInitialRotate;
         Brain.transform.rotation = BrainInitialRotate;
 
-
+    
     }
 
     void BrainEnabled()
     {
+        BrainInitialRotate = Quaternion.LookRotation(gazeDirection);
+
         Option1.GetComponent<TextMesh>().text = "Encephalopathy";
         Option2.GetComponent<TextMesh>().text = "Neurological disorder";
         Option3.GetComponent<TextMesh>().text = "Multiple sclerosis";
@@ -306,7 +322,6 @@ public class GlobalScripts : MonoBehaviour {
 
         Lungs.transform.rotation = lungsInitialRotate;
         Heart.transform.rotation = HeartInitialRotate;
-        
 
         lungsMaterial.color = new Color32(139, 49, 49, 128);
 
