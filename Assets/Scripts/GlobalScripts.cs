@@ -63,9 +63,9 @@ public class GlobalScripts : MonoBehaviour {
         HeartInitialScale = Heart.transform.localScale;
         BrainInitialScale = Brain.transform.localScale;
 
-        //lungsInitialRotate = Lungs.transform.rotation;
-        //HeartInitialRotate = Heart.transform.rotation;
-        //BrainInitialRotate = Brain.transform.rotation;
+        lungsInitialRotate = Lungs.transform.rotation;
+        HeartInitialRotate = Heart.transform.rotation;
+        BrainInitialRotate = Brain.transform.rotation;
 
         lungsMaterial.color = new Color32(139, 49, 49, 128);
 
@@ -146,9 +146,9 @@ public class GlobalScripts : MonoBehaviour {
                     Heart.transform.localScale = HeartInitialScale;
                     Brain.transform.localScale = BrainInitialScale;
 
-                    //Lungs.transform.rotation = lungsInitialRotate;
-                    //Heart.transform.rotation = HeartInitialRotate;
-                    //Brain.transform.rotation = BrainInitialRotate;
+                    //Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection);
+                    //Heart.transform.rotation = Quaternion.LookRotation(gazeDirection); 
+                    //Brain.transform.rotation = Quaternion.LookRotation(gazeDirection); 
 
                   
                     lungsMaterial.color = new Color32(139, 49, 49, 128);
@@ -220,8 +220,8 @@ public class GlobalScripts : MonoBehaviour {
         Brain.transform.localScale = BrainInitialScale;
 
 
-        Lungs.transform.rotation = lungsInitialRotate;
-        Brain.transform.rotation = BrainInitialRotate;
+        //Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection); 
+        Brain.transform.rotation = Quaternion.LookRotation(gazeDirection); 
   
 
         lungsMaterial.color = new Color32(139, 49, 49, 128);
@@ -273,8 +273,8 @@ public class GlobalScripts : MonoBehaviour {
         Heart.transform.localScale = HeartInitialScale;
         Brain.transform.localScale = BrainInitialScale;
 
-        Heart.transform.rotation = HeartInitialRotate;
-        Brain.transform.rotation = BrainInitialRotate;
+        Heart.transform.rotation = Quaternion.LookRotation(gazeDirection); 
+        Brain.transform.rotation = Quaternion.LookRotation(gazeDirection); 
 
     
     }
@@ -320,8 +320,8 @@ public class GlobalScripts : MonoBehaviour {
         Lungs.transform.localScale = lungsInitialScale;
         Heart.transform.localScale = HeartInitialScale;
 
-        Lungs.transform.rotation = lungsInitialRotate;
-        Heart.transform.rotation = HeartInitialRotate;
+        //Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection); 
+        Heart.transform.rotation = Quaternion.LookRotation(gazeDirection); 
 
         lungsMaterial.color = new Color32(139, 49, 49, 128);
 

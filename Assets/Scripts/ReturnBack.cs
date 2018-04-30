@@ -40,7 +40,7 @@ public class ReturnBack : MonoBehaviour, IInputClickHandler, IInputHandler
 
         Vector3 gazeDirection = Camera.main.transform.forward;
         Heart.transform.rotation = Quaternion.LookRotation(gazeDirection);
-        Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection);
+        //Lungs.transform.rotation = Quaternion.LookRotation(gazeDirection);
         Brain.transform.rotation = Quaternion.LookRotation(gazeDirection);
  
 
