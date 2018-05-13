@@ -7,7 +7,7 @@
 # Default behavior is to never overwrite files
 Bachelor.sln: modified
 Bachelor\App.cs: D2E32DAFC3CD1199CEB9CF0BEAF7BEC0
-Bachelor\Bachelor.csproj: 810A2F4949211C1A3EF0FAD86295F36D
+Bachelor\Bachelor.csproj: 9DA8C2831C3088CCE969CC37A12026A2
 Bachelor\Bachelor.csproj.user: modified
 Bachelor\Package.appxmanifest: 9816502CCB4CC3FCA182C1A159AFEB0E
 Bachelor\project.json: 1D02BC64BAC0D041019673A1C4C51737
